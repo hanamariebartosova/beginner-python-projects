@@ -1,0 +1,36 @@
+# the list of notes
+notes = ['c', 'cis', 'd', 'dis', 'e', 'f', 'fis', 'g', 'gis', 'a', 'ais', 'h']
+
+
+# get user input / note
+while True:
+    user_choice = input('Enter a note: ').lower()
+    if user_choice not in notes:
+        print('Invalid input. Try again.')
+    else:
+        break
+
+
+# get user input / shift number
+while True:
+    try:
+        shift_number = int(input('Enter a shift number:'))
+        break
+    except ValueError:
+        print('Invalid input.')
+    
+
+
+# calculate the modified note with a shift number
+user_choice_index = int(notes.index(user_choice))
+modified_choice_index = (int(notes.index(user_choice)) + shift_number) % len(notes)
+modified_choice = notes[modified_choice_index]
+
+print()
+
+# print the results 
+print(f'User choice is {user_choice}, which is equal to index {user_choice_index}.')
+print()
+print(f'Modified choice is {modified_choice}, which is equal to index {modified_choice_index}.')
+
+
