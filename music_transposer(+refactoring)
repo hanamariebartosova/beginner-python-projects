@@ -1,0 +1,78 @@
+# Dictionary of notes and their enharmonic equivalents for the European system
+enharmonic_map_european = {
+    'c': 'c', 'c♯': 'c♯', 'd♭': 'c♯',
+    'd': 'd', 'd♯': 'd♯', 'e♭': 'd♯',
+    'e': 'e', 'f': 'f', 'f♯': 'f♯', 'g♭': 'f♯',
+    'g': 'g', 'g♯': 'g♯', 'a♭': 'g♯',
+    'a': 'a', 'a♯': 'a♯', 'b': 'b',
+    'h': 'h', 'h♯': 'c'
+}
+
+# Dictionary of notes and their enharmonic equivalents for the American system
+enharmonic_map_american = {
+    'c': 'c', 'c♯': 'c♯', 'd♭': 'c♯',
+    'd': 'd', 'd♯': 'd♯', 'e♭': 'd♯',
+    'e': 'e', 'f': 'f', 'f♯': 'f♯', 'g♭': 'f♯',
+    'g': 'g', 'g♯': 'g♯', 'a♭': 'g♯',
+    'a': 'a', 'a♯': 'a♯', 'b♭': 'a♯',
+    'b': 'b', 'h': 'b', 'b♯': 'c'
+}
+
+# The list of standard notes (European system)
+standard_notes_european = ['c', 'c♯', 'd', 'd♯', 'e', 'f', 'f♯', 'g', 'g♯', 'a', 'b', 'h']
+
+# The list of standard notes (American system)
+standard_notes_american = ['c', 'c♯', 'd', 'd♯', 'e', 'f', 'f♯', 'g', 'g♯', 'a', 'a♯', 'b']
+
+
+def get_system_choice():
+    while True:
+        system_choice = input("Enter 1 for European system or 2 for American system: ")
+        if system_choice == '1':
+            print(f'You can choose from these notes: {standard_notes_european}')
+            return enharmonic_map_european, standard_notes_european
+        elif system_choice == '2':
+            print(f'You can choose from these notes: {standard_notes_american}')
+            return enharmonic_map_american, standard_notes_american
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
+
+
+def get_user_choice(enharmonic_map):
+    while True:
+        user_choice = input('Enter a note: ').lower()
+        if user_choice in enharmonic_map:
+            return enharmonic_map[user_choice] 
+        else:
+            print('Invalid input. Try again.')
+
+
+def get_shift_number():
+    while True:
+        try:
+            return int(input('Enter a shift number: '))
+        except ValueError:
+            print('Invalid input. Please enter a number.')
+
+
+def calculate_modified_note(user_choice, shift_number, standard_notes):
+    user_choice_index = standard_notes.index(user_choice)
+    modified_choice_index = (user_choice_index + shift_number) % len(standard_notes)
+    return standard_notes[modified_choice_index]
+
+
+def print_the_results(user_choice, modified_choice):
+    print(f'Original note is {user_choice}.')
+    print(f'Transposed note is {modified_choice}.')
+
+
+def transpose():
+    enharmonic_map, standard_notes = get_system_choice() 
+    user_choice = get_user_choice(enharmonic_map)  
+    shift_number = get_shift_number()  
+    modified_choice = calculate_modified_note(user_choice, shift_number, standard_notes)  
+    print_the_results(user_choice, modified_choice)  
+
+
+# Call the transpose function to run the program
+transpose()
