@@ -1,0 +1,68 @@
+shopping_list = []
+
+edit_shopping_list_options = """
+Here are the options to edit your shopping list:
+1. add an item
+2. remove an item
+3. Replace an item
+"""
+
+def add_item():
+    item_input = input("Enter the item you want to add to the shopping list: ").lower()
+    shopping_list.append(item_input)
+    print(f'Here is your updated shopping list: {shopping_list}')
+    
+
+def remove_item():
+    if shopping_list:
+        item_input = input("Enter the item you want to remove from the shopping list: ").lower()
+        if item_input in shopping_list:
+            shopping_list.remove(item_input)
+            print(f'Here is your updated shopping list: {shopping_list}')
+        else:
+            print(f'{item_input} is not in your shopping list.')
+    else:
+        print("The shopping list is empty at the moment.")
+
+def replace_item():
+    if shopping_list:
+        old_item = input("Enter the item you want to replace: ").lower()
+        if old_item in shopping_list:
+            new_item = input(f"Enter the new item to replace {old_item}: ").lower()
+            shopping_list[shopping_list.index(old_item)] = new_item
+            print(f'Here is your updated shopping list: {shopping_list}')
+        else:
+            print(f'{old_item} is not in the shopping list.')
+    else:
+        print("The shppping list is empty at the moment.")
+
+
+def lets_go_shopping():
+    print(f'This is the original shopping list: {shopping_list}')
+    while True:
+        if_go_shopping = input("Do you want to edit your shopping list? (y/n): ").lower()
+        if if_go_shopping == 'y':
+            print(edit_shopping_list_options)
+            while True:
+                option_number = input("Enter your option choice (1/2/3): ")
+                if option_number == "1":
+                    add_item()
+                    break
+                elif option_number == "2":
+                    remove_item()
+                    break
+                elif option_number == "3":
+                    replace_item()
+                    break
+                else:
+                    print("Invalid input. Try again.")
+            
+        elif if_go_shopping == 'n':
+            break
+        else:
+            print("Invalid input. Try again.")
+
+
+lets_go_shopping()
+
+
