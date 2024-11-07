@@ -1,0 +1,24 @@
+import random 
+
+names = ["Ameli", "Kloe", "Renzo", "Matheo", "Alice", "Lucas"]
+
+
+while True:
+    print(f'This is the original list of names: {names}.')
+    if_add_name = input("Would you like to add a name to the list? (y/n): ")
+    if if_add_name == "y":       
+        while True:
+            add_name = input("Add a name: ").title()
+            if add_name.isalpha():
+                names.append(add_name)
+                break
+            else:
+                print("Invalid input. Try again.")
+    elif if_add_name == "n":
+        break
+    else:
+        print("Invalid input. Try again.")
+
+random_name = random.choice(names)
+print(f'Here is the randomly chosen name: {random_name}.')
+
