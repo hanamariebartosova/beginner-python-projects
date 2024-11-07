@@ -1,0 +1,35 @@
+while True: 
+    try:
+        amount = float(input('Enter the amount: '))
+        if amount <= 0:
+            raise ValueError()
+        break
+    except ValueError:
+        print('Invalid amout.')
+
+currencies = ('SOL', 'EUR', 'CZK')
+
+while True:
+    source_currency = input('Source currency (SOL/EUR/CZK): ').upper()
+    if source_currency not in currencies:
+        print('Invalid currency. ')
+    else:
+        break
+
+while True:
+    target_currency = input('Target currency (USD/EUR/CZK): ').upper()
+    if target_currency not in currencies:
+        print('Invalid currency. ')
+    else:
+        break
+
+
+exchange_rates = {
+    'SOL': {'EUR': 0.24, 'CZK': 6.16},
+    'EUR': {'SOL': 4.10, 'CZK': 25.29},
+    'CZK': {'EUR': 0.040, 'SOL': 0.16},
+}
+
+converted_amount = amount * exchange_rates[source_currency][target_currency]
+
+print(f'{amount} {source_currency} is equal to {converted_amount:.2f} {target_currency}')
